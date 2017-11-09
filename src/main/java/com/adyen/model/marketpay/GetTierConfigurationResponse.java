@@ -38,11 +38,6 @@ public class GetTierConfigurationResponse {
     @SerializedName("pspReference")
     private String pspReference = null;
 
-    public GetTierConfigurationResponse submittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-        return this;
-    }
-
     /**
      * Get submittedAsync
      *
@@ -50,20 +45,6 @@ public class GetTierConfigurationResponse {
      **/
     public Boolean getSubmittedAsync() {
         return submittedAsync;
-    }
-
-    public void setSubmittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-    }
-
-    public GetTierConfigurationResponse tierConfiguration(List<TierConfiguration> tierConfiguration) {
-        this.tierConfiguration = tierConfiguration;
-        return this;
-    }
-
-    public GetTierConfigurationResponse addTierConfigurationItem(TierConfiguration tierConfigurationItem) {
-        this.tierConfiguration.add(tierConfigurationItem);
-        return this;
     }
 
     /**
@@ -92,11 +73,6 @@ public class GetTierConfigurationResponse {
     public String getPspReference() {
         return pspReference;
     }
-
-    public void setPspReference(String pspReference) {
-        this.pspReference = pspReference;
-    }
-
 
     @Override
     public boolean equals(Object o) {

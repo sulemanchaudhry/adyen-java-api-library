@@ -53,15 +53,6 @@ public class CloseAccountHolderResponse {
         return accountStatus;
     }
 
-    public void setAccountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
-    public CloseAccountHolderResponse submittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-        return this;
-    }
-
     /**
      * Get submittedAsync
      *
@@ -69,15 +60,6 @@ public class CloseAccountHolderResponse {
      **/
     public Boolean getSubmittedAsync() {
         return submittedAsync;
-    }
-
-    public void setSubmittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-    }
-
-    public CloseAccountHolderResponse accountHolderStatus(AccountHolderStatus accountHolderStatus) {
-        this.accountHolderStatus = accountHolderStatus;
-        return this;
     }
 
     /**
@@ -89,15 +71,6 @@ public class CloseAccountHolderResponse {
         return accountHolderStatus;
     }
 
-    public void setAccountHolderStatus(AccountHolderStatus accountHolderStatus) {
-        this.accountHolderStatus = accountHolderStatus;
-    }
-
-    public CloseAccountHolderResponse pspReference(String pspReference) {
-        this.pspReference = pspReference;
-        return this;
-    }
-
     /**
      * psp reference
      *
@@ -105,10 +78,6 @@ public class CloseAccountHolderResponse {
      **/
     public String getPspReference() {
         return pspReference;
-    }
-
-    public void setPspReference(String pspReference) {
-        this.pspReference = pspReference;
     }
 
 
@@ -147,8 +116,7 @@ public class CloseAccountHolderResponse {
     }
 
     /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
+     * Convert the given object to string with each line indented by 4 spaces (except the first line).
      */
     private String toIndentedString(Object o) {
         if (o == null) {

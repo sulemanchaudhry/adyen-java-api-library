@@ -46,17 +46,13 @@ public class CreateAccountResponse {
      * account status
      */
     public enum StatusEnum {
-        @SerializedName("Active")
-        ACTIVE("Active"),
+        @SerializedName("Active") ACTIVE("Active"),
 
-        @SerializedName("Closed")
-        CLOSED("Closed"),
+        @SerializedName("Closed") CLOSED("Closed"),
 
-        @SerializedName("Inactive")
-        INACTIVE("Inactive"),
+        @SerializedName("Inactive") INACTIVE("Inactive"),
 
-        @SerializedName("Suspended")
-        SUSPENDED("Suspended");
+        @SerializedName("Suspended") SUSPENDED("Suspended");
 
         private String value;
 
@@ -76,11 +72,6 @@ public class CreateAccountResponse {
     @SerializedName("payoutSchedule")
     private PayoutScheduleResponse payoutSchedule = null;
 
-    public CreateAccountResponse accountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
-        return this;
-    }
-
     /**
      * account status
      *
@@ -88,15 +79,6 @@ public class CreateAccountResponse {
      **/
     public AccountStatus getAccountStatus() {
         return accountStatus;
-    }
-
-    public void setAccountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
-    public CreateAccountResponse submittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-        return this;
     }
 
     /**
@@ -108,15 +90,6 @@ public class CreateAccountResponse {
         return submittedAsync;
     }
 
-    public void setSubmittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-    }
-
-    public CreateAccountResponse accountHolderCode(String accountHolderCode) {
-        this.accountHolderCode = accountHolderCode;
-        return this;
-    }
-
     /**
      * account holder code
      *
@@ -124,15 +97,6 @@ public class CreateAccountResponse {
      **/
     public String getAccountHolderCode() {
         return accountHolderCode;
-    }
-
-    public void setAccountHolderCode(String accountHolderCode) {
-        this.accountHolderCode = accountHolderCode;
-    }
-
-    public CreateAccountResponse accountCode(String accountCode) {
-        this.accountCode = accountCode;
-        return this;
     }
 
     /**
@@ -144,15 +108,6 @@ public class CreateAccountResponse {
         return accountCode;
     }
 
-    public void setAccountCode(String accountCode) {
-        this.accountCode = accountCode;
-    }
-
-    public CreateAccountResponse pspReference(String pspReference) {
-        this.pspReference = pspReference;
-        return this;
-    }
-
     /**
      * psp reference
      *
@@ -160,15 +115,6 @@ public class CreateAccountResponse {
      **/
     public String getPspReference() {
         return pspReference;
-    }
-
-    public void setPspReference(String pspReference) {
-        this.pspReference = pspReference;
-    }
-
-    public CreateAccountResponse status(StatusEnum status) {
-        this.status = status;
-        return this;
     }
 
     /**
@@ -180,15 +126,6 @@ public class CreateAccountResponse {
         return status;
     }
 
-    public void setStatus(StatusEnum status) {
-        this.status = status;
-    }
-
-    public CreateAccountResponse payoutSchedule(PayoutScheduleResponse payoutSchedule) {
-        this.payoutSchedule = payoutSchedule;
-        return this;
-    }
-
     /**
      * parameters of the created payout schedule
      *
@@ -196,10 +133,6 @@ public class CreateAccountResponse {
      **/
     public PayoutScheduleResponse getPayoutSchedule() {
         return payoutSchedule;
-    }
-
-    public void setPayoutSchedule(PayoutScheduleResponse payoutSchedule) {
-        this.payoutSchedule = payoutSchedule;
     }
 
 
@@ -244,8 +177,7 @@ public class CreateAccountResponse {
     }
 
     /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
+     * Convert the given object to string with each line indented by 4 spaces (except the first line).
      */
     private String toIndentedString(Object o) {
         if (o == null) {

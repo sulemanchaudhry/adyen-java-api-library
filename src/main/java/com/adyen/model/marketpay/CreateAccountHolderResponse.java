@@ -64,11 +64,6 @@ public class CreateAccountHolderResponse {
     @SerializedName("kycVerificationResults")
     private List<KYCVerificationResult> kycVerificationResults = new ArrayList<KYCVerificationResult>();
 
-    public CreateAccountHolderResponse accountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
-        return this;
-    }
-
     /**
      * status of created account holder
      *
@@ -76,15 +71,6 @@ public class CreateAccountHolderResponse {
      **/
     public AccountStatus getAccountStatus() {
         return accountStatus;
-    }
-
-    public void setAccountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
-    public CreateAccountHolderResponse verificationResult(KYCVerificationResult verificationResult) {
-        this.verificationResult = verificationResult;
-        return this;
     }
 
     /**
@@ -96,15 +82,6 @@ public class CreateAccountHolderResponse {
         return verificationResult;
     }
 
-    public void setVerificationResult(KYCVerificationResult verificationResult) {
-        this.verificationResult = verificationResult;
-    }
-
-    public CreateAccountHolderResponse submittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-        return this;
-    }
-
     /**
      * Get submittedAsync
      *
@@ -112,15 +89,6 @@ public class CreateAccountHolderResponse {
      **/
     public Boolean getSubmittedAsync() {
         return submittedAsync;
-    }
-
-    public void setSubmittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-    }
-
-    public CreateAccountHolderResponse accountHolderCode(String accountHolderCode) {
-        this.accountHolderCode = accountHolderCode;
-        return this;
     }
 
     /**
@@ -132,15 +100,6 @@ public class CreateAccountHolderResponse {
         return accountHolderCode;
     }
 
-    public void setAccountHolderCode(String accountHolderCode) {
-        this.accountHolderCode = accountHolderCode;
-    }
-
-    public CreateAccountHolderResponse accountCode(String accountCode) {
-        this.accountCode = accountCode;
-        return this;
-    }
-
     /**
      * account holder's account code (if an account has been created for the account holder)
      *
@@ -148,20 +107,6 @@ public class CreateAccountHolderResponse {
      **/
     public String getAccountCode() {
         return accountCode;
-    }
-
-    public void setAccountCode(String accountCode) {
-        this.accountCode = accountCode;
-    }
-
-    public CreateAccountHolderResponse requirementsForNextAccountState(List<AccountStateRequirement> requirementsForNextAccountState) {
-        this.requirementsForNextAccountState = requirementsForNextAccountState;
-        return this;
-    }
-
-    public CreateAccountHolderResponse addRequirementsForNextAccountStateItem(AccountStateRequirement requirementsForNextAccountStateItem) {
-        this.requirementsForNextAccountState.add(requirementsForNextAccountStateItem);
-        return this;
     }
 
     /**
@@ -172,11 +117,6 @@ public class CreateAccountHolderResponse {
     public List<AccountStateRequirement> getRequirementsForNextAccountState() {
         return requirementsForNextAccountState;
     }
-
-    public void setRequirementsForNextAccountState(List<AccountStateRequirement> requirementsForNextAccountState) {
-        this.requirementsForNextAccountState = requirementsForNextAccountState;
-    }
-
 
     /**
      * Populate the virtual invalidFields to bypass the invalidFieldsContainers list
@@ -198,65 +138,12 @@ public class CreateAccountHolderResponse {
     }
 
     /**
-     * Creating a new invalidFields list
-     *
-     * @param invalidFields
-     */
-    public void setInvalidFields(List<ErrorFieldType> invalidFields) {
-        this.invalidFields = invalidFields;
-
-        // set as well the container list this will be send in the API request
-        this.invalidFieldsContainers = new ArrayList<ErrorFieldTypeContainer>();
-        for (ErrorFieldType invalidField : invalidFields) {
-
-            ErrorFieldTypeContainer invalidFieldContainer = createInvalidFieldContainerFromInvalidField(invalidField);
-            this.invalidFieldsContainers.add(invalidFieldContainer);
-        }
-    }
-
-    public CreateAccountHolderResponse addInvalidField(ErrorFieldType invalidField) {
-        ErrorFieldTypeContainer invalidFieldContainer = createInvalidFieldContainerFromInvalidField(invalidField);
-
-        if (invalidFieldsContainers == null) {
-            invalidFieldsContainers = new ArrayList<ErrorFieldTypeContainer>();
-        }
-        this.invalidFieldsContainers.add(invalidFieldContainer);
-
-        if (invalidFields == null) {
-            invalidFields = new ArrayList<ErrorFieldType>();
-        }
-        this.invalidFields.add(invalidField);
-
-        return this;
-    }
-
-    private ErrorFieldTypeContainer createInvalidFieldContainerFromInvalidField(ErrorFieldType invalidField) {
-        ErrorFieldTypeContainer invalidFieldContainer = new ErrorFieldTypeContainer();
-        invalidFieldContainer.setErrorFieldType(invalidField);
-        return invalidFieldContainer;
-    }
-
-    public CreateAccountHolderResponse accountHolderDetails(AccountHolderDetails accountHolderDetails) {
-        this.accountHolderDetails = accountHolderDetails;
-        return this;
-    }
-
-    /**
      * details of created account holder
      *
      * @return accountHolderDetails
      **/
     public AccountHolderDetails getAccountHolderDetails() {
         return accountHolderDetails;
-    }
-
-    public void setAccountHolderDetails(AccountHolderDetails accountHolderDetails) {
-        this.accountHolderDetails = accountHolderDetails;
-    }
-
-    public CreateAccountHolderResponse accountHolderStatus(AccountHolderStatus accountHolderStatus) {
-        this.accountHolderStatus = accountHolderStatus;
-        return this;
     }
 
     /**
@@ -268,15 +155,6 @@ public class CreateAccountHolderResponse {
         return accountHolderStatus;
     }
 
-    public void setAccountHolderStatus(AccountHolderStatus accountHolderStatus) {
-        this.accountHolderStatus = accountHolderStatus;
-    }
-
-    public CreateAccountHolderResponse pspReference(String pspReference) {
-        this.pspReference = pspReference;
-        return this;
-    }
-
     /**
      * psp reference
      *
@@ -284,20 +162,6 @@ public class CreateAccountHolderResponse {
      **/
     public String getPspReference() {
         return pspReference;
-    }
-
-    public void setPspReference(String pspReference) {
-        this.pspReference = pspReference;
-    }
-
-    public CreateAccountHolderResponse kycVerificationResults(List<KYCVerificationResult> kycVerificationResults) {
-        this.kycVerificationResults = kycVerificationResults;
-        return this;
-    }
-
-    public CreateAccountHolderResponse addKycVerificationResultsItem(KYCVerificationResult kycVerificationResultsItem) {
-        this.kycVerificationResults.add(kycVerificationResultsItem);
-        return this;
     }
 
     /**
@@ -308,11 +172,6 @@ public class CreateAccountHolderResponse {
     public List<KYCVerificationResult> getKycVerificationResults() {
         return kycVerificationResults;
     }
-
-    public void setKycVerificationResults(List<KYCVerificationResult> kycVerificationResults) {
-        this.kycVerificationResults = kycVerificationResults;
-    }
-
 
     @Override
     public boolean equals(Object o) {

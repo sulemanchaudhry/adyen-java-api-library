@@ -47,15 +47,6 @@ public class GenericResponse {
         return submittedAsync;
     }
 
-    public void setSubmittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-    }
-
-    public GenericResponse pspReference(String pspReference) {
-        this.pspReference = pspReference;
-        return this;
-    }
-
     /**
      * psp reference
      *
@@ -63,10 +54,6 @@ public class GenericResponse {
      **/
     public String getPspReference() {
         return pspReference;
-    }
-
-    public void setPspReference(String pspReference) {
-        this.pspReference = pspReference;
     }
 
 

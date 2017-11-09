@@ -46,11 +46,6 @@ public class AccountHolderBalanceResponse {
     @SerializedName("pspReference")
     private String pspReference = null;
 
-    public AccountHolderBalanceResponse submittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-        return this;
-    }
-
     /**
      * Get submittedAsync
      *
@@ -60,29 +55,11 @@ public class AccountHolderBalanceResponse {
         return submittedAsync;
     }
 
-    public void setSubmittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-    }
-
-    public AccountHolderBalanceResponse totalBalance(DetailBalance totalBalance) {
-        this.totalBalance = totalBalance;
-        return this;
-    }
-
     /**
      * @return totalBalance
      **/
     public DetailBalance getTotalBalance() {
         return totalBalance;
-    }
-
-    public void setTotalBalance(DetailBalance totalBalance) {
-        this.totalBalance = totalBalance;
-    }
-
-    public AccountHolderBalanceResponse resultCode(String resultCode) {
-        this.resultCode = resultCode;
-        return this;
     }
 
     /**
@@ -93,11 +70,6 @@ public class AccountHolderBalanceResponse {
     public String getResultCode() {
         return resultCode;
     }
-
-    public void setResultCode(String resultCode) {
-        this.resultCode = resultCode;
-    }
-
 
     /**
      * Populate the virtual balancePerAccount to bypass the balancePerAccountContainers list
@@ -120,52 +92,6 @@ public class AccountHolderBalanceResponse {
     }
 
     /**
-     * Creating a new balancePerAccount list
-     *
-     * @param balancePerAccount
-     */
-    public void setBalancePerAccount(List<AccountDetailBalance> balancePerAccount) {
-
-        this.balancePerAccount = balancePerAccount;
-
-        // set as well the container list this will be send in the API request
-        this.balancePerAccountContainers = new ArrayList<AccountDetailBalanceContainer>();
-
-        for (AccountDetailBalance accountDetailBalance : balancePerAccount) {
-
-            AccountDetailBalanceContainer accountDetailBalanceContainer = createAccountDetailBalanceContainerFromAccountDetailBalance(accountDetailBalance);
-            this.balancePerAccountContainers.add(accountDetailBalanceContainer);
-        }
-    }
-
-    public AccountHolderBalanceResponse addBalancePerAccount(AccountDetailBalance accountDetailBalance) {
-        AccountDetailBalanceContainer accountDetailBalanceContainer = createAccountDetailBalanceContainerFromAccountDetailBalance(accountDetailBalance);
-
-        if (balancePerAccountContainers == null) {
-            balancePerAccountContainers = new ArrayList<AccountDetailBalanceContainer>();
-        }
-        this.balancePerAccountContainers.add(accountDetailBalanceContainer);
-
-        if (balancePerAccount == null) {
-            balancePerAccount = new ArrayList<AccountDetailBalance>();
-        }
-        this.balancePerAccount.add(accountDetailBalance);
-
-        return this;
-    }
-
-    private AccountDetailBalanceContainer createAccountDetailBalanceContainerFromAccountDetailBalance(AccountDetailBalance accountDetailBalance) {
-        AccountDetailBalanceContainer accountDetailBalanceContainer = new AccountDetailBalanceContainer();
-        accountDetailBalanceContainer.setAccountDetailBalance(accountDetailBalance);
-        return accountDetailBalanceContainer;
-    }
-
-    public AccountHolderBalanceResponse pspReference(String pspReference) {
-        this.pspReference = pspReference;
-        return this;
-    }
-
-    /**
      * psp reference
      *
      * @return pspReference
@@ -173,11 +99,6 @@ public class AccountHolderBalanceResponse {
     public String getPspReference() {
         return pspReference;
     }
-
-    public void setPspReference(String pspReference) {
-        this.pspReference = pspReference;
-    }
-
 
     @Override
     public boolean equals(Object o) {

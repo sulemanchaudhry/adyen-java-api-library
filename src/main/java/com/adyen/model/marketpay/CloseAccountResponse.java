@@ -40,17 +40,13 @@ public class CloseAccountResponse {
      * account holder's account status after account closure
      */
     public enum StatusEnum {
-        @SerializedName("Active")
-        ACTIVE("Active"),
+        @SerializedName("Active") ACTIVE("Active"),
 
-        @SerializedName("Closed")
-        CLOSED("Closed"),
+        @SerializedName("Closed") CLOSED("Closed"),
 
-        @SerializedName("Inactive")
-        INACTIVE("Inactive"),
+        @SerializedName("Inactive") INACTIVE("Inactive"),
 
-        @SerializedName("Suspended")
-        SUSPENDED("Suspended");
+        @SerializedName("Suspended") SUSPENDED("Suspended");
 
         private String value;
 
@@ -67,11 +63,6 @@ public class CloseAccountResponse {
     @SerializedName("status")
     private StatusEnum status = null;
 
-    public CloseAccountResponse accountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
-        return this;
-    }
-
     /**
      * account holder's account status after account closure
      *
@@ -79,15 +70,6 @@ public class CloseAccountResponse {
      **/
     public AccountStatus getAccountStatus() {
         return accountStatus;
-    }
-
-    public void setAccountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
-    public CloseAccountResponse submittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-        return this;
     }
 
     /**
@@ -99,15 +81,6 @@ public class CloseAccountResponse {
         return submittedAsync;
     }
 
-    public void setSubmittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-    }
-
-    public CloseAccountResponse pspReference(String pspReference) {
-        this.pspReference = pspReference;
-        return this;
-    }
-
     /**
      * psp reference
      *
@@ -115,15 +88,6 @@ public class CloseAccountResponse {
      **/
     public String getPspReference() {
         return pspReference;
-    }
-
-    public void setPspReference(String pspReference) {
-        this.pspReference = pspReference;
-    }
-
-    public CloseAccountResponse status(StatusEnum status) {
-        this.status = status;
-        return this;
     }
 
     /**
@@ -134,11 +98,6 @@ public class CloseAccountResponse {
     public StatusEnum getStatus() {
         return status;
     }
-
-    public void setStatus(StatusEnum status) {
-        this.status = status;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -176,8 +135,7 @@ public class CloseAccountResponse {
     }
 
     /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
+     * Convert the given object to string with each line indented by 4 spaces (except the first line).
      */
     private String toIndentedString(Object o) {
         if (o == null) {

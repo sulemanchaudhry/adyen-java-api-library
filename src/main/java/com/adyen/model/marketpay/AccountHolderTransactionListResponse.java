@@ -43,11 +43,6 @@ public class AccountHolderTransactionListResponse {
     @SerializedName("pspReference")
     private String pspReference = null;
 
-    public AccountHolderTransactionListResponse submittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-        return this;
-    }
-
     /**
      * Get submittedAsync
      *
@@ -55,20 +50,6 @@ public class AccountHolderTransactionListResponse {
      **/
     public Boolean getSubmittedAsync() {
         return submittedAsync;
-    }
-
-    public void setSubmittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-    }
-
-    public AccountHolderTransactionListResponse accountTransactionListContainers(List<AccountTransactionListContainer> accountTransactionListContainers) {
-        this.accountTransactionListContainers = accountTransactionListContainers;
-        return this;
-    }
-
-    public AccountHolderTransactionListResponse addAccountTransactionListContainersItem(AccountTransactionListContainer accountTransactionListContainerItem) {
-        this.accountTransactionListContainers.add(accountTransactionListContainerItem);
-        return this;
     }
 
     /**
@@ -89,68 +70,12 @@ public class AccountHolderTransactionListResponse {
     }
 
     /**
-     * Creating a new accountTransactionLists list
-     *
-     * @param accountTransactionLists
-     */
-    public void setAccountTransactionLists(List<AccountTransactionList> accountTransactionLists) {
-
-        this.accountTransactionLists = accountTransactionLists;
-
-        this.accountTransactionListContainers = new ArrayList<AccountTransactionListContainer>();
-
-        for (AccountTransactionList accountTransactionList : accountTransactionLists) {
-
-            AccountTransactionListContainer accountTransactionListContainer = createAccountTransactionListContainerFromAccountTransactionList(accountTransactionList);
-            this.accountTransactionListContainers.add(accountTransactionListContainer);
-        }
-
-    }
-
-    public AccountHolderTransactionListResponse addAccountTransactionList(AccountTransactionList accountTransactionList) {
-        AccountTransactionListContainer accountTransactionListContainer = createAccountTransactionListContainerFromAccountTransactionList(accountTransactionList);
-
-        if (accountTransactionListContainers == null) {
-            accountTransactionListContainers = new ArrayList<AccountTransactionListContainer>();
-        }
-        this.accountTransactionListContainers.add(accountTransactionListContainer);
-
-        if (accountTransactionLists == null) {
-            accountTransactionLists = new ArrayList<AccountTransactionList>();
-        }
-        this.accountTransactionLists.add(accountTransactionList);
-
-        return this;
-    }
-
-    private AccountTransactionListContainer createAccountTransactionListContainerFromAccountTransactionList(AccountTransactionList accountTransactionList) {
-        AccountTransactionListContainer accountTransactionListContainer = new AccountTransactionListContainer();
-        accountTransactionListContainer.setAccountTransactionList(accountTransactionList);
-        return accountTransactionListContainer;
-    }
-
-
-    public AccountHolderTransactionListResponse resultCode(String resultCode) {
-        this.resultCode = resultCode;
-        return this;
-    }
-
-    /**
      * The result code
      *
      * @return resultCode
      **/
     public String getResultCode() {
         return resultCode;
-    }
-
-    public void setResultCode(String resultCode) {
-        this.resultCode = resultCode;
-    }
-
-    public AccountHolderTransactionListResponse pspReference(String pspReference) {
-        this.pspReference = pspReference;
-        return this;
     }
 
     /**
@@ -161,11 +86,6 @@ public class AccountHolderTransactionListResponse {
     public String getPspReference() {
         return pspReference;
     }
-
-    public void setPspReference(String pspReference) {
-        this.pspReference = pspReference;
-    }
-
 
     @Override
     public boolean equals(Object o) {

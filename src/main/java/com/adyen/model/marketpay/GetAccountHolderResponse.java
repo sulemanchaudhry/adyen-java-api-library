@@ -101,10 +101,6 @@ public class GetAccountHolderResponse {
         return accountStatus;
     }
 
-    public void setAccountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
     public GetAccountHolderResponse verificationResult(KYCVerificationResult verificationResult) {
         this.verificationResult = verificationResult;
         return this;
@@ -117,10 +113,6 @@ public class GetAccountHolderResponse {
      **/
     public KYCVerificationResult getVerificationResult() {
         return verificationResult;
-    }
-
-    public void setVerificationResult(KYCVerificationResult verificationResult) {
-        this.verificationResult = verificationResult;
     }
 
     public GetAccountHolderResponse submittedAsync(Boolean submittedAsync) {
@@ -137,10 +129,6 @@ public class GetAccountHolderResponse {
         return submittedAsync;
     }
 
-    public void setSubmittedAsync(Boolean submittedAsync) {
-        this.submittedAsync = submittedAsync;
-    }
-
     public GetAccountHolderResponse accountHolderCode(String accountHolderCode) {
         this.accountHolderCode = accountHolderCode;
         return this;
@@ -153,10 +141,6 @@ public class GetAccountHolderResponse {
      **/
     public String getAccountHolderCode() {
         return accountHolderCode;
-    }
-
-    public void setAccountHolderCode(String accountHolderCode) {
-        this.accountHolderCode = accountHolderCode;
     }
 
     public GetAccountHolderResponse virtualAccounts(List<String> virtualAccounts) {
@@ -178,10 +162,6 @@ public class GetAccountHolderResponse {
         return virtualAccounts;
     }
 
-    public void setVirtualAccounts(List<String> virtualAccounts) {
-        this.virtualAccounts = virtualAccounts;
-    }
-
     public GetAccountHolderResponse requirementsForNextAccountState(List<AccountStateRequirement> requirementsForNextAccountState) {
         this.requirementsForNextAccountState = requirementsForNextAccountState;
         return this;
@@ -201,10 +181,6 @@ public class GetAccountHolderResponse {
         return requirementsForNextAccountState;
     }
 
-    public void setRequirementsForNextAccountState(List<AccountStateRequirement> requirementsForNextAccountState) {
-        this.requirementsForNextAccountState = requirementsForNextAccountState;
-    }
-
     public GetAccountHolderResponse accountHolderDetails(AccountHolderDetails accountHolderDetails) {
         this.accountHolderDetails = accountHolderDetails;
         return this;
@@ -219,15 +195,6 @@ public class GetAccountHolderResponse {
         return accountHolderDetails;
     }
 
-    public void setAccountHolderDetails(AccountHolderDetails accountHolderDetails) {
-        this.accountHolderDetails = accountHolderDetails;
-    }
-
-    public GetAccountHolderResponse accountHolderStatus(AccountHolderStatus accountHolderStatus) {
-        this.accountHolderStatus = accountHolderStatus;
-        return this;
-    }
-
     /**
      * account holder status
      *
@@ -235,10 +202,6 @@ public class GetAccountHolderResponse {
      **/
     public AccountHolderStatus getAccountHolderStatus() {
         return accountHolderStatus;
-    }
-
-    public void setAccountHolderStatus(AccountHolderStatus accountHolderStatus) {
-        this.accountHolderStatus = accountHolderStatus;
     }
 
     /**
@@ -259,80 +222,12 @@ public class GetAccountHolderResponse {
     }
 
     /**
-     * Creating a new accounts list
-     *
-     * @param accounts
-     */
-    public void setAccounts(List<Account> accounts) {
-
-        this.accounts = accounts;
-
-        // set as well the container list this will be send in the API request
-        this.accountContainers = new ArrayList<AccountContainer>();
-
-        for (Account account : accounts) {
-
-            AccountContainer accountContainer = createAccountContainerFromAccount(account);
-            this.accountContainers.add(accountContainer);
-        }
-    }
-
-    /**
-     * Add account to the accountContainers and accounts lists
-     *
-     * @param account
-     * @return
-     */
-    public GetAccountHolderResponse addAccount(Account account) {
-        AccountContainer accountContainer = createAccountContainerFromAccount(account);
-
-        if (accountContainers == null) {
-            accountContainers = new ArrayList<AccountContainer>();
-        }
-        this.accountContainers.add(accountContainer);
-
-        if (accounts == null) {
-            accounts = new ArrayList<Account>();
-        }
-
-        this.accounts.add(account);
-
-        return this;
-
-    }
-
-    private AccountContainer createAccountContainerFromAccount(Account account) {
-        AccountContainer accountContainer = new AccountContainer();
-        accountContainer.setAccount(account);
-        return accountContainer;
-    }
-
-    public GetAccountHolderResponse pspReference(String pspReference) {
-        this.pspReference = pspReference;
-        return this;
-    }
-
-    /**
      * psp reference
      *
      * @return pspReference
      **/
     public String getPspReference() {
         return pspReference;
-    }
-
-    public void setPspReference(String pspReference) {
-        this.pspReference = pspReference;
-    }
-
-    public GetAccountHolderResponse kycVerificationResults(List<KYCVerificationResult> kycVerificationResults) {
-        this.kycVerificationResults = kycVerificationResults;
-        return this;
-    }
-
-    public GetAccountHolderResponse addKycVerificationResultsItem(KYCVerificationResult kycVerificationResultsItem) {
-        this.kycVerificationResults.add(kycVerificationResultsItem);
-        return this;
     }
 
     /**
@@ -344,15 +239,6 @@ public class GetAccountHolderResponse {
         return kycVerificationResults;
     }
 
-    public void setKycVerificationResults(List<KYCVerificationResult> kycVerificationResults) {
-        this.kycVerificationResults = kycVerificationResults;
-    }
-
-    public GetAccountHolderResponse legalEntity(LegalEntityEnum legalEntity) {
-        this.legalEntity = legalEntity;
-        return this;
-    }
-
     /**
      * account holder legal entity type (Busines / Individual)
      *
@@ -361,11 +247,6 @@ public class GetAccountHolderResponse {
     public LegalEntityEnum getLegalEntity() {
         return legalEntity;
     }
-
-    public void setLegalEntity(LegalEntityEnum legalEntity) {
-        this.legalEntity = legalEntity;
-    }
-
 
     @Override
     public boolean equals(Object o) {
