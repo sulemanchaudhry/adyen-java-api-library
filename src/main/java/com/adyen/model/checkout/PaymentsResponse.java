@@ -22,7 +22,9 @@
 package com.adyen.model.checkout;
 
 import com.adyen.Util.DateUtil;
+import com.adyen.model.Amount;
 import com.adyen.model.FraudResult;
+import com.adyen.model.ThreeDS2Result;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -31,6 +33,7 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -105,6 +108,9 @@ public class PaymentsResponse {
     @SerializedName("action")
     private CheckoutPaymentsAction action;
 
+    @SerializedName("amount")
+    private Amount amount = null;
+
     public PaymentsResponse additionalData(Map<String, String> additionalData) {
         this.additionalData = additionalData;
         return this;
@@ -150,7 +156,7 @@ public class PaymentsResponse {
     public PaymentsResponse addDetailsItem(InputDetail detailsItem) {
 
         if (this.details == null) {
-            this.details = new ArrayList<InputDetail>();
+            this.details = new ArrayList<>();
         }
 
         this.details.add(detailsItem);
@@ -371,6 +377,24 @@ public class PaymentsResponse {
         return this;
     }
 
+    public PaymentsResponse amount(Amount amount) {
+        this.amount = amount;
+        return this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return amount
+     **/
+    public Amount getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Amount amount) {
+        this.amount = amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -396,13 +420,15 @@ public class PaymentsResponse {
                 && Objects.equals(this.outputDetails, paymentsResponse.outputDetails)
                 && Objects.equals(this.authentication, paymentsResponse.authentication)
                 && Objects.equals(this.threeDS2Result, paymentsResponse.threeDS2Result)
-                && Objects.equals(this.action, paymentsResponse.action);
+                && Objects.equals(this.action, paymentsResponse.action)
+                && Objects.equals(this.amount, paymentsResponse.amount);
+
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(additionalData, details, fraudResult, paymentData, pspReference, redirect, refusalReason, resultCode, serviceError, authResponse, merchantReference, outputDetails, authentication, threeDS2Result, action);
+        return Objects.hash(additionalData, details, fraudResult, paymentData, pspReference, redirect, refusalReason, resultCode, serviceError, authResponse, merchantReference, outputDetails, authentication, threeDS2Result, action, amount);
     }
 
     @Override
@@ -425,6 +451,7 @@ public class PaymentsResponse {
         sb.append("    authentication: ").append(toIndentedString(authentication)).append("\n");
         sb.append("    threeDS2Result: ").append(toIndentedString(threeDS2Result)).append("\n");
         sb.append("    action: ").append(toIndentedString(action)).append("\n");
+        sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -478,12 +505,9 @@ public class PaymentsResponse {
         }
 
         public static ResultCodeEnum fromValue(String text) {
-            for (ResultCodeEnum b : ResultCodeEnum.values()) {
-                if (String.valueOf(b.value).equals(text)) {
-                    return b;
-                }
-            }
-            return null;
+            return Arrays.stream(values()).
+                    filter(s -> s.value.equals(text)).
+                    findFirst().orElse(null);
         }
 
         public String getValue() {

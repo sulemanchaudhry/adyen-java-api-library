@@ -14,38 +14,51 @@
  *
  * Adyen Java API Library
  *
- * Copyright (c) 2017 Adyen B.V.
+ * Copyright (c) 2020 Adyen B.V.
  * This file is open source and available under the MIT license.
  * See the LICENSE file for more info.
  */
-package com.adyen.model.marketpay;
 
-import java.util.Objects;
+package com.adyen.model.checkout.details;
+
+import com.adyen.model.checkout.PaymentMethodDetails;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * AccountDetailBalanceContainer
- */
-public class AccountDetailBalanceContainer {
-    @SerializedName("AccountDetailBalance")
-    private AccountDetailBalance accountDetailBalance = null;
+import java.util.Objects;
 
-    public AccountDetailBalanceContainer(AccountDetailBalance accountDetailBalance) {
-        this.accountDetailBalance = accountDetailBalance;
+/**
+ * GiropayDetails
+ */
+
+public class GiropayDetails implements PaymentMethodDetails {
+    /**
+     * Possible types
+     */
+    public static final String GIROPAY = "giropay";
+
+    @SerializedName("type")
+    private String type = GIROPAY;
+
+    public GiropayDetails type(String type) {
+        this.type = type;
+        return this;
     }
 
     /**
-     * accountDetailBalance
+     * **giropay**
      *
-     * @return accountDetailBalance
-     */
-    public AccountDetailBalance getAccountDetailBalance() {
-        return accountDetailBalance;
+     * @return type
+     **/
+    @Override
+    public String getType() {
+        return type;
     }
 
-    public void setAccountDetailBalance(AccountDetailBalance accountDetailBalance) {
-        this.accountDetailBalance = accountDetailBalance;
+    @Override
+    public void setType(String type) {
+        this.type = type;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -55,30 +68,35 @@ public class AccountDetailBalanceContainer {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AccountDetailBalanceContainer accountDetailBalanceContainer = (AccountDetailBalanceContainer) o;
-        return Objects.equals(this.accountDetailBalance, accountDetailBalanceContainer.accountDetailBalance);
+        GiropayDetails giropayDetails = (GiropayDetails) o;
+        return Objects.equals(this.type, giropayDetails.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountDetailBalance);
+        return Objects.hash(type);
     }
 
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class AccountDetailBalanceContainer {\n");
+        sb.append("class GiropayDetails {\n");
 
-        sb.append("    accountDetailBalance: ").append(toIndentedString(accountDetailBalance)).append("\n");
+        sb.append("    type: ").append(toIndentedString(type)).append("\n");
         sb.append("}");
         return sb.toString();
     }
 
+    /**
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
+
 }

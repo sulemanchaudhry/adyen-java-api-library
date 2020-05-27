@@ -53,6 +53,9 @@ public class ModificationResult {
         @SerializedName("[cancel-received]")
         CANCEL_RECEIVED_("[cancel-received]"),
 
+        @SerializedName("[technical-cancel-received]")
+        TECHNICAL_CANCEL_RECEIVED_("[technical-cancel-received]"),
+
         @SerializedName("[refund-received]")
         REFUND_RECEIVED_("[refund-received]"),
 
@@ -63,7 +66,10 @@ public class ModificationResult {
         ADJUSTAUTHORISATION_RECEIVED_("[adjustAuthorisation-received]"),
 
         @SerializedName("[voidPendingRefund-received]")
-        VOIDPENDINGREFUND_RECEIVED_("[voidPendingRefund-received]");
+        VOIDPENDINGREFUND_RECEIVED_("[voidPendingRefund-received]"),
+
+        @SerializedName("[donation-received]")
+        DONATION_RECEIVED_("[donation-received]");
 
         private String value;
 

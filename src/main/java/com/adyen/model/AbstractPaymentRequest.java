@@ -20,12 +20,6 @@
  */
 package com.adyen.model;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import com.adyen.constants.ApiConstants;
 import com.adyen.model.applicationinfo.ApplicationInfo;
 import com.adyen.model.recurring.Recurring;
@@ -33,6 +27,14 @@ import com.adyen.serializer.DateSerializer;
 import com.adyen.serializer.DateTimeGMTSerializer;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 
 /**
  * AbstractPaymentRequest Base for PaymentRequest and PaymentRequest3D
@@ -95,6 +97,33 @@ public abstract class AbstractPaymentRequest<T extends AbstractPaymentRequest<T>
 
     @SerializedName("fraudOffset")
     private Integer fraudOffset = null;
+
+    /**
+     * How to process a combo card (for some Brazilian cards only). Allowed values: * debit * credit
+     */
+    public enum FundingSourceEnum {
+
+        @SerializedName("debit") DEBIT("debit"),
+        @SerializedName("credit") CREDIT("credit");
+
+        private String value;
+
+        FundingSourceEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+    }
+
+    @SerializedName("fundingSource")
+    private FundingSourceEnum fundingSource = null;
 
     @SerializedName("sessionId")
     private String sessionId = null;
@@ -173,7 +202,8 @@ public abstract class AbstractPaymentRequest<T extends AbstractPaymentRequest<T>
 
     /**
      * Set browser data
-     * @param userAgent http header
+     *
+     * @param userAgent    http header
      * @param acceptHeader http header
      * @return browser data
      */
@@ -193,7 +223,7 @@ public abstract class AbstractPaymentRequest<T extends AbstractPaymentRequest<T>
      */
     public Map<String, String> getOrCreateAdditionalData() {
         if (this.getAdditionalData() == null) {
-            this.setAdditionalData(new HashMap<String, String>());
+            this.setAdditionalData(new HashMap<>());
         }
 
         return this.getAdditionalData();
@@ -414,6 +444,25 @@ public abstract class AbstractPaymentRequest<T extends AbstractPaymentRequest<T>
         this.sessionId = sessionId;
         return (T) this;
     }
+
+    public T fundingSource(FundingSourceEnum fundingSource) {
+        this.fundingSource = fundingSource;
+        return (T) this;
+    }
+
+    /**
+     * How to process a combo card (for some Brazilian cards only). Allowed values: * debit * credit
+     *
+     * @return fundingSource
+     **/
+    public FundingSourceEnum getFundingSource() {
+        return fundingSource;
+    }
+
+    public void setFundingSource(FundingSourceEnum fundingSource) {
+        this.fundingSource = fundingSource;
+    }
+
 
     /**
      * Get sessionId
@@ -781,6 +830,7 @@ public abstract class AbstractPaymentRequest<T extends AbstractPaymentRequest<T>
 
     /**
      * Choose if a specific transaction should use the Real-time Account Updater, regardless of other settings.
+     *
      * @return enableRealTimeUpdate
      **/
     public Boolean isEnableRealTimeUpdate() {
@@ -798,6 +848,7 @@ public abstract class AbstractPaymentRequest<T extends AbstractPaymentRequest<T>
 
     /**
      * If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/checkout/3d-secure/native-3ds2/authentication-only), and not the payment authorisation.
+     *
      * @return threeDSAuthenticationOnly
      **/
     public Boolean isThreeDSAuthenticationOnly() {
@@ -829,6 +880,7 @@ public abstract class AbstractPaymentRequest<T extends AbstractPaymentRequest<T>
                 && Objects.equals(this.recurring, paymentRequest.recurring)
                 && Objects.equals(this.shopperStatement, paymentRequest.shopperStatement)
                 && Objects.equals(this.fraudOffset, paymentRequest.fraudOffset)
+                && Objects.equals(this.fundingSource, paymentRequest.fundingSource)
                 && Objects.equals(this.sessionId, paymentRequest.sessionId)
                 && Objects.equals(this.additionalAmount, paymentRequest.additionalAmount)
                 && Objects.equals(this.selectedRecurringDetailReference, paymentRequest.selectedRecurringDetailReference)
@@ -857,40 +909,41 @@ public abstract class AbstractPaymentRequest<T extends AbstractPaymentRequest<T>
     @Override
     public int hashCode() {
         return Objects.hash(amount,
-                            reference,
-                            billingAddress,
-                            shopperIP,
-                            merchantAccount,
-                            browserInfo,
-                            shopperInteraction,
-                            shopperEmail,
-                            shopperReference,
-                            recurring,
-                            shopperStatement,
-                            fraudOffset,
-                            sessionId,
-                            additionalAmount,
-                            selectedRecurringDetailReference,
-                            orderReference,
-                            merchantOrderReference,
-                            dccQuote,
-                            additionalData,
-                            shopperName,
-                            shopperLocale,
-                            selectedBrand,
-                            deliveryAddress,
-                            deliveryDate,
-                            deviceFingerprint,
-                            installments,
-                            socialSecurityNumber,
-                            captureDelayHours,
-                            dateOfBirth,
-                            telephoneNumber,
-                            mcc,
-                            metadata,
-                            applicationInfo,
-                            enableRealTimeUpdate,
-                            threeDSAuthenticationOnly);
+                reference,
+                billingAddress,
+                shopperIP,
+                merchantAccount,
+                browserInfo,
+                shopperInteraction,
+                shopperEmail,
+                shopperReference,
+                recurring,
+                shopperStatement,
+                fraudOffset,
+                fundingSource,
+                sessionId,
+                additionalAmount,
+                selectedRecurringDetailReference,
+                orderReference,
+                merchantOrderReference,
+                dccQuote,
+                additionalData,
+                shopperName,
+                shopperLocale,
+                selectedBrand,
+                deliveryAddress,
+                deliveryDate,
+                deviceFingerprint,
+                installments,
+                socialSecurityNumber,
+                captureDelayHours,
+                dateOfBirth,
+                telephoneNumber,
+                mcc,
+                metadata,
+                applicationInfo,
+                enableRealTimeUpdate,
+                threeDSAuthenticationOnly);
     }
 
     @Override
@@ -909,6 +962,7 @@ public abstract class AbstractPaymentRequest<T extends AbstractPaymentRequest<T>
         sb.append("    recurring: ").append(toIndentedString(recurring)).append("\n");
         sb.append("    shopperStatement: ").append(toIndentedString(shopperStatement)).append("\n");
         sb.append("    fraudOffset: ").append(toIndentedString(fraudOffset)).append("\n");
+        sb.append("    fundingSource: ").append(toIndentedString(fundingSource)).append("\n");
         sb.append("    sessionId: ").append(toIndentedString(sessionId)).append("\n");
         sb.append("    additionalAmount: ").append(toIndentedString(additionalAmount)).append("\n");
         sb.append("    selectedRecurringDetailReference: ").append(toIndentedString(selectedRecurringDetailReference)).append("\n");
@@ -941,18 +995,14 @@ public abstract class AbstractPaymentRequest<T extends AbstractPaymentRequest<T>
             return null;
         }
 
-        Map<String, String> nonSensitiveAdditionalData = new HashMap<String, String>(additionalData);
+        Map<String, String> nonSensitiveAdditionalData = new HashMap<>(additionalData);
         List<String> keys = Arrays.asList(ApiConstants.AdditionalData.Card.Encrypted.JSON,
-                                          ApiConstants.AdditionalData.ENCRYPTED_CARD_NUMBER,
-                                          ApiConstants.AdditionalData.ENCRYPTED_EXPIRY_MONTH,
-                                          ApiConstants.AdditionalData.ENCRYPTED_EXPIRY_YEAR,
-                                          ApiConstants.AdditionalData.ENCRYPTED_SECURITY_CODE);
+                ApiConstants.AdditionalData.ENCRYPTED_CARD_NUMBER,
+                ApiConstants.AdditionalData.ENCRYPTED_EXPIRY_MONTH,
+                ApiConstants.AdditionalData.ENCRYPTED_EXPIRY_YEAR,
+                ApiConstants.AdditionalData.ENCRYPTED_SECURITY_CODE);
 
-        for (String key : keys) {
-            if (nonSensitiveAdditionalData.containsKey(key)) {
-                nonSensitiveAdditionalData.put(key, "***");
-            }
-        }
+        keys.stream().forEach(s -> nonSensitiveAdditionalData.computeIfPresent(s, (s1, s2) -> "***"));
 
         return nonSensitiveAdditionalData.toString();
     }

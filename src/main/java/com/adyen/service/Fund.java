@@ -1,3 +1,4 @@
+
 /*
  *                       ######
  *                       ######
@@ -14,10 +15,11 @@
  *
  * Adyen Java API Library
  *
- * Copyright (c) 2017 Adyen B.V.
+ * Copyright (c) 2020 Adyen B.V.
  * This file is open source and available under the MIT license.
  * See the LICENSE file for more info.
  */
+
 package com.adyen.service;
 
 import com.adyen.Client;
@@ -28,19 +30,25 @@ import com.adyen.model.marketpay.AccountHolderTransactionListRequest;
 import com.adyen.model.marketpay.AccountHolderTransactionListResponse;
 import com.adyen.model.marketpay.PayoutAccountHolderRequest;
 import com.adyen.model.marketpay.PayoutAccountHolderResponse;
+import com.adyen.model.marketpay.RefundFundsTransferRequest;
+import com.adyen.model.marketpay.RefundFundsTransferResponse;
 import com.adyen.model.marketpay.RefundNotPaidOutTransfersRequest;
 import com.adyen.model.marketpay.RefundNotPaidOutTransfersResponse;
 import com.adyen.model.marketpay.SetupBeneficiaryRequest;
 import com.adyen.model.marketpay.SetupBeneficiaryResponse;
 import com.adyen.model.marketpay.TransferFundsRequest;
 import com.adyen.model.marketpay.TransferFundsResponse;
+import com.adyen.service.exception.ApiException;
 import com.adyen.service.resource.fund.AccountHolderBalance;
 import com.adyen.service.resource.fund.AccountHolderTransactionList;
 import com.adyen.service.resource.fund.PayoutAccountHolder;
+import com.adyen.service.resource.fund.RefundFundsTransfer;
 import com.adyen.service.resource.fund.RefundNotPaidOutTransfers;
 import com.adyen.service.resource.fund.SetupBeneficiary;
 import com.adyen.service.resource.fund.TransferFunds;
 import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
 
 public class Fund extends Service {
 
@@ -50,6 +58,7 @@ public class Fund extends Service {
     private AccountHolderTransactionList accountHolderTransactionList;
     private RefundNotPaidOutTransfers refundNotPaidOutTransfers;
     private SetupBeneficiary setupBeneficiary;
+    private RefundFundsTransfer refundFundsTransfer;
 
     public Fund(Client client) {
         super(client);
@@ -59,10 +68,10 @@ public class Fund extends Service {
         accountHolderTransactionList = new AccountHolderTransactionList(this);
         refundNotPaidOutTransfers = new RefundNotPaidOutTransfers(this);
         setupBeneficiary = new SetupBeneficiary(this);
-
+        refundFundsTransfer = new RefundFundsTransfer(this);
     }
 
-    public AccountHolderBalanceResponse accountHolderBalance(AccountHolderBalanceRequest accountHolderBalanceRequest) throws Exception {
+    public AccountHolderBalanceResponse accountHolderBalance(AccountHolderBalanceRequest accountHolderBalanceRequest) throws ApiException, IOException {
         String jsonRequest = GSON.toJson(accountHolderBalanceRequest);
 
         String jsonResult = accountHolderBalance.request(jsonRequest);
@@ -74,7 +83,7 @@ public class Fund extends Service {
         return accountHolderBalanceResponse;
     }
 
-    public TransferFundsResponse transferFunds(TransferFundsRequest transferFundsRequest) throws Exception {
+    public TransferFundsResponse transferFunds(TransferFundsRequest transferFundsRequest) throws ApiException, IOException {
         String jsonRequest = GSON.toJson(transferFundsRequest);
 
         String jsonResult = transferFunds.request(jsonRequest);
@@ -86,7 +95,7 @@ public class Fund extends Service {
         return transferFundsResponse;
     }
 
-    public PayoutAccountHolderResponse payoutAccountHolder(PayoutAccountHolderRequest payoutAccountHolderRequest) throws Exception {
+    public PayoutAccountHolderResponse payoutAccountHolder(PayoutAccountHolderRequest payoutAccountHolderRequest) throws ApiException, IOException {
         String jsonRequest = GSON.toJson(payoutAccountHolderRequest);
 
         String jsonResult = payoutAccountHolder.request(jsonRequest);
@@ -98,7 +107,7 @@ public class Fund extends Service {
         return payoutAccountHolderResponse;
     }
 
-    public AccountHolderTransactionListResponse accountHolderTransactionList(AccountHolderTransactionListRequest accountHolderTransactionListRequest) throws Exception {
+    public AccountHolderTransactionListResponse accountHolderTransactionList(AccountHolderTransactionListRequest accountHolderTransactionListRequest) throws ApiException, IOException {
         String jsonRequest = GSON.toJson(accountHolderTransactionListRequest);
 
         String jsonResult = accountHolderTransactionList.request(jsonRequest);
@@ -110,7 +119,7 @@ public class Fund extends Service {
         return accountHolderTransactionListResponse;
     }
 
-    public RefundNotPaidOutTransfersResponse refundNotPaidOutTransfers(RefundNotPaidOutTransfersRequest refundNotPaidOutTransfersRequest) throws Exception {
+    public RefundNotPaidOutTransfersResponse refundNotPaidOutTransfers(RefundNotPaidOutTransfersRequest refundNotPaidOutTransfersRequest) throws ApiException, IOException {
         String jsonRequest = GSON.toJson(refundNotPaidOutTransfersRequest);
 
         String jsonResult = refundNotPaidOutTransfers.request(jsonRequest);
@@ -121,7 +130,7 @@ public class Fund extends Service {
         return refundNotPaidOutTransfersResponse;
     }
 
-    public SetupBeneficiaryResponse setupBeneficiary(SetupBeneficiaryRequest setupBeneficiaryRequest) throws Exception {
+    public SetupBeneficiaryResponse setupBeneficiary(SetupBeneficiaryRequest setupBeneficiaryRequest) throws ApiException, IOException {
         String jsonRequest = GSON.toJson(setupBeneficiaryRequest);
 
         String jsonResult = setupBeneficiary.request(jsonRequest);
@@ -130,5 +139,16 @@ public class Fund extends Service {
         }.getType());
 
         return setupBeneficiaryResponse;
+    }
+
+    public RefundFundsTransferResponse refundFundsTransfer(RefundFundsTransferRequest refundFundsTransferRequest) throws ApiException, IOException {
+        String jsonRequest = GSON.toJson(refundFundsTransferRequest);
+
+        String jsonResult = refundFundsTransfer.request(jsonRequest);
+
+        RefundFundsTransferResponse refundFundsTransferResponse = GSON.fromJson(jsonResult, new TypeToken<RefundFundsTransferResponse>() {
+        }.getType());
+
+        return refundFundsTransferResponse;
     }
 }
